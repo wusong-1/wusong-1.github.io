@@ -9,47 +9,32 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #000;
-    color: #fff;
+    background: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   }
   .container {
-    position: relative;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     text-align: center;
     padding: 20px;
+    box-sizing: border-box;
   }
   .tip-text {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  /* 箭头动画 */
-  .arrow {
-    width: 80px;
-    height: 80px;
-    border-right: 6px solid #fff;
-    border-top: 6px solid #fff;
-    transform: rotate(45deg);
-    animation: arrowMove 1.2s infinite;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-  @keyframes arrowMove {
-    0% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
-    70% { transform: rotate(45deg) translate(-15px, 15px); opacity: 0; }
-    100% { opacity: 0; }
+    font-size: 28px; /* 字体更大 */
+    color: red;
+    font-weight: bold;
+    line-height: 1.6;
+    word-break: break-word;
   }
 </style>
 </head>
 <body>
 <div class="container" id="weixinTip" style="display:none;">
-  <div class="arrow"></div>
-  <div class="tip-text">点击右上角“···”<br>选择“在浏览器打开”</div>
+  <div class="tip-text">
+    点击右上角“···”<br>选择“在浏览器中打开”
+  </div>
 </div>
 
 <script>
