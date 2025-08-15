@@ -2,39 +2,172 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <!-- 屏幕自适应 -->
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-  <!-- 如果你仍有 http 资源，尝试自动升级为 https（只有对方支持 https 时才有效） -->
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes" />
+  <title>请在浏览器中打开</title>
   <style>
-    /* 让 iframe 真正铺满可视区（在移动端更稳） */
-    html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
+    :root {
+      --bg: #0b0f19;
+      --card: #121829;
+      --txt: #e6e9f2;
+      --muted: #9aa4bf;
+      --accent: #5b8cff;
+      --btn: #1f2a44;
+      --btn2: #2a3554;
+      --radius: 16px;
     }
-    body {
-      min-height: 100vh;
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{
+      width:min(520px,96vw);
+      background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 10px 30px rgba(0,0,0,0.35);
+      border-radius:var(--radius);
+      padding:24px 20px;
     }
-    iframe {
-      border: 0;
-      width: 100vw;
-      height: 100vh;
-      display: block;
+    h1{margin:6px 0 8px;font-size:20px}
+    p{margin:0 0 8px;color:var(--muted)}
+    .steps{margin-top:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:12px}
+    .step{display:flex;gap:12px;align-items:flex-start;margin:10px 0;padding:10px;border-radius:12px;background:rgba(255,255,255,0.03)}
+    .step strong{color:#fff}
+    .badge{display:inline-block;background:var(--btn2);padding:2px 8px;border-radius:999px;color:#cfd7ee;font-size:12px;border:1px solid rgba(255,255,255,0.08)}
+    .code{word-break:break-all;background:#0d1324;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:10px;color:#cfe0ff}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button,a.btn{
+      cursor:pointer;border:0;border-radius:12px;padding:10px 14px;background:var(--btn);
+      color:#e8eeff;text-decoration:none;display:inline-flex;align-items:center;gap:8px
     }
+    button.primary,a.btn.primary{background:var(--accent);color:#fff}
+    .hint{margin-top:10px;color:#9fb1ff;font-size:13px}
+    .arrow{
+      width:48px;height:48px;flex:0 0 48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background:rgba(91,140,255,0.12);border:1px solid rgba(91,140,255,0.35)
+    }
+    .sr{position:absolute;left:-9999px}
   </style>
 </head>
 <body>
-  <!-- 用你确认支持 HTTPS 的地址 -->
-  <iframe
-    src="https://xn--0fx274b3jk.cc/haokan?ldk=ex07L4HhJNx3i3ZKVXr8MOVSoo00oEZ5RiIHgQCCv7xgfmg"
-    allowfullscreen
-    referrerpolicy="no-referrer"
-  ></iframe>
+<div class="wrap">
+  <div class="card" id="container">
+    <span class="badge" id="envBadge">正在判断环境…</span>
+    <h1 id="title">请在浏览器中打开</h1>
+    <p id="desc">为保证支付与登录等功能正常，请按下面提示在系统浏览器中打开。</p>
 
-  <!-- 如确实需要 jQuery，请用可信 HTTPS CDN；不需要就直接删掉整段脚本 -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> -->
+    <div class="steps">
+      <div class="step">
+        <div class="arrow" aria-hidden="true">
+          <!-- 上方斜箭头图标 -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M7 7h10v10M17 7L6 18" stroke="currentColor" stroke-width="2" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <strong>方法一（推荐）：点右上角“···”</strong>
+          <div>选择 <b>在浏览器打开</b>（iOS 选择“在 Safari 中打开”，Android 选择“在浏览器中打开”）。</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="arrow" aria-hidden="true">
+          <!-- 链接图标 -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M10 14a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1" stroke="currentColor" stroke-width="2"/>
+            <path d="M14 10a5 5 0 0 1 0 7l-1 1a5 5 0 1 1-7-7l1-1" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div>
+          <strong>方法二：复制链接到浏览器</strong>
+          <div class="code" id="linkText"></div>
+          <div class="btns">
+            <button id="copyBtn">一键复制</button>
+            <a id="openAnchor" class="btn primary" href="#" rel="noreferrer">尝试直接打开</a>
+          </div>
+          <div class="hint">复制后，粘贴到手机自带浏览器或 Chrome / Safari 打开。</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint" id="fallbackHint" style="display:none">已检测到你不在微信内，将为你跳转…</p>
+    <noscript><p class="hint">若未自动跳转，请手动点击上面的“尝试直接打开”。</p></noscript>
+  </div>
+</div>
+
+<script>
+(function () {
+  // 1) 目标地址：支持通过 ?target=... 传入；否则使用这里的默认 REAL_URL
+  const DEFAULT_REAL_URL = "https://xn--0fx274b3jk.cc/haokan?ldk=ex07L4HhJNx3i3ZKVXr8MOVSoo00oEZ5RiIHgQCCv7xgfmg";
+  const qs = new URLSearchParams(location.search);
+  const targetParam = qs.get("target");
+  // 允许 target 是编码过的完整 URL
+  let REAL_URL;
+  try {
+    REAL_URL = targetParam ? decodeURIComponent(targetParam) : DEFAULT_REAL_URL;
+  } catch {
+    REAL_URL = targetParam || DEFAULT_REAL_URL;
+  }
+
+  // 2) 环境与平台判断
+  const ua = navigator.userAgent || "";
+  const isWeChat = /MicroMessenger/i.test(ua);
+  const isWeCom  = /wxwork/i.test(ua); // 企业微信
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const envBadge = document.getElementById("envBadge");
+
+  // 3) 把链接展示出来 + a 标签 href
+  document.getElementById("linkText").textContent = REAL_URL;
+  const openAnchor = document.getElementById("openAnchor");
+  openAnchor.href = REAL_URL;
+
+  // 4) 文案微调
+  if (isWeChat || isWeCom) {
+    envBadge.textContent = isWeCom ? "企业微信内打开" : "微信内打开";
+    document.getElementById("title").textContent = "请在系统浏览器中打开";
+    document.getElementById("desc").textContent =
+      "由于微信内置浏览器对支付/登录有限制，请按提示用系统浏览器打开。";
+  } else {
+    envBadge.textContent = isIOS ? "iOS 浏览器" : isAndroid ? "Android 浏览器" : "外部浏览器";
+  }
+
+  // 5) 微信外自动跳转
+  const fallbackHint = document.getElementById("fallbackHint");
+  if (!isWeChat && !isWeCom) {
+    fallbackHint.style.display = "block";
+    // 使用 replace 避免产生历史记录
+    setTimeout(() => { window.location.replace(REAL_URL); }, 300);
+  }
+
+  // 6) 复制按钮
+  const copyBtn = document.getElementById("copyBtn");
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(REAL_URL);
+      copyBtn.textContent = "已复制";
+      copyBtn.disabled = true;
+      setTimeout(() => { copyBtn.textContent = "一键复制"; copyBtn.disabled = false; }, 1800);
+    } catch {
+      // 兼容旧环境
+      const sel = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById("linkText"));
+      sel.removeAllRanges(); sel.addRange(range);
+      const ok = document.execCommand("copy");
+      sel.removeAllRanges();
+      copyBtn.textContent = ok ? "已复制" : "复制失败";
+      setTimeout(() => { copyBtn.textContent = "一键复制"; }, 1800);
+    }
+  });
+
+  // 7) 提供 postMessage 钩子（若你的 iframe 子页需要让父页顶层打开）
+  // window.addEventListener("message", (e) => {
+  //   const { type, url } = e.data || {};
+  //   if (type === "OPEN_TOP" && typeof url === "string") {
+  //     window.top.location.href = url;
+  //   }
+  // });
+})();
+</script>
 </body>
 </html>
